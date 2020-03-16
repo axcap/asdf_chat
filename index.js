@@ -1,4 +1,5 @@
-var app = require('express')();
+var express = require('express')
+var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 const { uuid } = require('uuidv4');
@@ -59,12 +60,7 @@ function generate_message(author, message) {
 }
 
 
-app.get('/', function (req, res) {
-    res.sendFile(__dirname + '/index.html');
-});
-app.get('/style.css', function (req, res) {
-    res.sendFile(__dirname + '/style.css');
-});
+app.use(express.static('.'))
 
 io.on('connection', function (socket) {
     var id = uuid();
