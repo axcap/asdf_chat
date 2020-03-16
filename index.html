@@ -2,8 +2,9 @@
 <html>
 
 <head>
-  <title>Socket.IO chat</title>
-  <link rel="stylesheet" href="style.css">
+    <title>Socket.IO chat</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
 
 <script src="/socket.io/socket.io.js"></script>
@@ -11,10 +12,25 @@
 <script src="front-end.js"></script>
 
 <body>
-  <ul class="chat" id="messages"></ul>
-  <form action="">
-    <input id="m" autocomplete="off" /><button>Send</button>
-  </form>
+    <div style="background-color: violet;">
+        <ul class="chat" id="messages">
+        </ul>
+    </div>
+    <div style="background-color: red;">
+        <div id="outer">
+            <div class="inner add-image"><button id="m" onclick="send_image(event)">🌄</button></div>
+            <div class="inner add-audio"><button id="m" onclick="send_audio(event)">🎙</button></div>
+            <div class="inner text-input">
+                <form action="">
+                    <input id="msg" autocomplete="off" style="height: 100%;" />
+                </form>
+            </div>
+            <div class="inner send-button">
+                <button id="m" onclick="send_text(event)">Send</button>
+            </div>
+            <!-- <div class=" inner send-button "><button id="m ">Send</button></div> -->
+        </div>
+    </div>
 </body>
 
 </html>

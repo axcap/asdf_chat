@@ -1,42 +1,127 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400);
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
-form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
-form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 .chat {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
-
-ul li{
-  display:inline-block;
-  clear: both;
-  padding: 20px;
-  border-radius: 30px;
-  margin-bottom: 2px;
-  font: 400 .9em 'Open Sans', sans-serif;
-  font-size: 150%
-}
-
 
 .message-in {
-  background-color: Lavender;
-  float: left;
+    background-color: Lavender;
+    float: left;
 }
 
 .message-out {
-  background-color: AntiqueWhite;
-  float: right;
+    background-color: AntiqueWhite;
+    float: right;
+}
+
+.chat {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul {
+    width: 100%;
+    background-color: gray;
+}
+
+ul li {
+    display: inline-block;
+    clear: both;
+    padding: 20px;
+    border-radius: 30px;
+    margin-bottom: 2px;
+    background-color: gray;
+    font: 400 .9em 'Open Sans', sans-serif;
+    font-size: 150%
+}
+
+.message-in {
+    background-color: Lavender;
+    float: left;
+}
+
+.message-out {
+    background-color: AntiqueWhite;
+    float: right;
 }
 
 .no-bubble {
-  display:inline-block;
-  clear: both;
-  padding: 0px;
-  border-radius: 0px;
-  margin-bottom: 0px;
-  background-color: transparent;
+    display: inline-block;
+    clear: both;
+    padding: 0px;
+    border-radius: 0px;
+    margin-bottom: 0px;
+    background-color: transparent;
+}
+
+#outer {
+    position: fixed;
+    bottom: 0;
+    height: 7%;
+    width: 100%;
+    text-align: center;
+    background-color: orange;
+}
+
+.inner {
+    display: inline-block;
+    height: 20%;
+}
+
+.add-image {
+    height: 100%;
+    width: 15%;
+    font-size: 150%;
+    float: left;
+    background-color: teal;
+    float: left;
+    padding: 0;
+}
+
+.add-audio {
+    height: 100%;
+    width: 15%;
+    font-size: 150%;
+    float: left;
+    background-color: teal;
+    float: left;
+    padding: 0;
+}
+
+.send-button {
+    height: 100%;
+    width: 15%;
+    float: right;
+    background-color: teal;
+}
+
+.text-input {
+    color: #000;
+    background-color: maroon;
+    width: 55%;
+    height: 100%;
+}
+
+form {
+    height: 100%;
+}
+
+#m {
+    height: 100%;
+    width: 100%;
+    font-size: 150%
+}
+
+#msg {
+    height: 100%;
+    width: 100%;
+    font-size: 150%
 }

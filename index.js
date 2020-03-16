@@ -62,24 +62,37 @@ function generate_message(author, message) {
 
 app.use(express.static('.'))
 
-io.on('connection', function (socket) {
+io.on('connection', function(socket) {
     var id = uuid();
     console.log(id + ' connected');
 
-    socket.on('disconnect', function () {
+    socket.on('disconnect', function() {
         console.log(id + '  disconnected');
     });
 
     // Welcome message to this client
-    socket.emit('img', generate_image('Server', 'https://i.redd.it/y69fmqpuunc41.jpg'));
-    socket.emit('wav', generate_audio('Server', 'https://www.w3schools.com/html/horse.ogg'));
+    //socket.emit('img', generate_image('Server', 'https://i.redd.it/y69fmqpuunc41.jpg'));
+    //socket.emit('wav', generate_audio('Server', 'http://www.arilou.org/songs/r/Star%20Wars%20-%20Cantina.mp3'));
 
-    socket.on('txt', function (msg) {
-        console.log(id + ': ' + msg);
-        socket.broadcast.emit('txt', generate_message(id, msg));
+    socket.on('txt', function(data) {
+        console.log(id + ': ' + data);
+        data.txt.author = id;
+        socket.broadcast.emit('txt', data);
+    });
+
+    socket.on('img', function(data) {
+        console.log(id + ': ' + data);
+        data.img.author = id;
+        socket.broadcast.emit('img', data);
+    });
+
+    socket.on('wav', function(data) {
+        console.log(id + ': ' + data.wav.author);
+        data.wav.author = id;
+        socket.broadcast.emit('wav', data);
     });
 });
 
-http.listen(port, function () {
+http.listen(port, function() {
     console.log('listening on port *:' + port);
 });
