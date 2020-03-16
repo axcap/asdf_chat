@@ -1,36 +1,42 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Socket.IO chat</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-  <script>
-    $(function () {
-        var socket = io();
-        $('form').submit(function(e){
-            e.preventDefault(); // prevents page reloading
-            socket.emit('txt', $('#m').val());
-            $('#messages').append($('<li class=" message-out">').text($('#m').val()));
-            $('#m').val('').focus();
-            return false;
-        });
-        socket.on('txt', function(msg){
-          $('#messages').append($('<li class=" message-in">').text(msg.txt.message));
-        });
+<head>
+  <title>Socket.IO chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
 
-        socket.on('img', function(msg){
-          $('#messages').append($('<li class=" message-in"> <img src="' + msg.img.uri +'" width="320" height="240"> </li>'));
-        });
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+  $(function () {
+    var socket = io();
+    $('form').submit(function (e) {
+      e.preventDefault(); // prevents page reloading
+      socket.emit('txt', $('#m').val());
+      $('#messages').append($('<li class=" message-out">').text($('#m').val()));
+      $('#m').val('').focus();
+      return false;
     });
-    </script>
+    socket.on('txt', function (msg) {
+      $('#messages').append($('<li class=" message-in">').text(msg.txt.message));
+    });
 
-  <body>
-    <ul class="chat" id="messages" tabindex="1"> </ul>
-    <form action="">
-      <input id="m" autocomplete="off" /><button>Send</button>
-    </form>
-  </body>
+    socket.on('img', function (msg) {
+      $('#messages').append($('<li class="no-bubble message-in"> <img src="' + msg.img.uri + '" width="320" height="240"> </li>'));
+    });
+
+    socket.on('wav', function (msg) {
+      $('#messages').append($('<li class="no-bubble message-in"> <audio controls> <source src=' + msg.wav.uri + ' type="audio/ogg"> Your browser does not support the audio element. </audio></li>'));
+    });
+  });
+</script>
+
+<body>
+  <ul class="chat" id="messages"></ul>
+  <form action="">
+    <input id="m" autocomplete="off" /><button>Send</button>
+  </form>
+</body>
+
 </html>

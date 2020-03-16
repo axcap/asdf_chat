@@ -1,7 +1,7 @@
 var app = require('express')();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
-const {uuid} = require('uuidv4');
+const { uuid } = require('uuidv4');
 const port = 6969;
 
 
@@ -21,6 +21,14 @@ Image format:
       "uri": "Image path.",
   },
 }
+
+Sound format:
+{
+  "wav": {
+      "author": "Who send this message.",
+      "uri": "Audio path.",
+  },
+}
 */
 
 function generate_image(author, uri) {
@@ -29,8 +37,17 @@ function generate_image(author, uri) {
             "author": author,
             "uri": uri,
         },
-      }
-  }
+    }
+}
+
+function generate_audio(author, uri) {
+    return {
+        "wav": {
+            "author": author,
+            "uri": uri,
+        },
+    }
+}
 
 function generate_message(author, message) {
     return {
@@ -38,34 +55,35 @@ function generate_message(author, message) {
             "author": author,
             "message": message,
         },
-      }
-  }
+    }
+}
 
 
-app.get('/', function(req, res){
+app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
-app.get('/style.css', function(req, res){
+app.get('/style.css', function (req, res) {
     res.sendFile(__dirname + '/style.css');
 });
 
-io.on('connection', function(socket){
+io.on('connection', function (socket) {
     var id = uuid();
-    console.log(id+' connected');
+    console.log(id + ' connected');
 
-    socket.on('disconnect', function(){
-        console.log(id+'  disconnected');
+    socket.on('disconnect', function () {
+        console.log(id + '  disconnected');
     });
 
     // Welcome message to this client
     socket.emit('img', generate_image('Server', 'https://i.redd.it/y69fmqpuunc41.jpg'));
+    socket.emit('wav', generate_audio('Server', 'https://www.w3schools.com/html/horse.ogg'));
 
-    socket.on('txt', function(msg){
-        console.log(id+': '+msg);
+    socket.on('txt', function (msg) {
+        console.log(id + ': ' + msg);
         socket.broadcast.emit('txt', generate_message(id, msg));
     });
 });
 
-http.listen(port, function(){
-    console.log('listening on port *:'+port);
+http.listen(port, function () {
+    console.log('listening on port *:' + port);
 });

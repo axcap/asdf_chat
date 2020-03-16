@@ -24,6 +24,7 @@ ul li{
   font-size: 150%
 }
 
+
 .message-in {
   background-color: Lavender;
   float: left;
@@ -32,4 +33,13 @@ ul li{
 .message-out {
   background-color: AntiqueWhite;
   float: right;
+}
+
+.no-bubble {
+  display:inline-block;
+  clear: both;
+  padding: 0px;
+  border-radius: 0px;
+  margin-bottom: 0px;
+  background-color: transparent;
 }
